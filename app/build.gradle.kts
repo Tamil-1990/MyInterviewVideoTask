@@ -19,8 +19,17 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
+        android.buildFeatures.buildConfig = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val apiKey = project.findProperty("PEXELS_API_KEY") as String
+
+        buildConfigField(
+            "String",
+            "PEXELS_API_KEY",
+            "\"$apiKey\""
+        )
+
     }
 
     buildTypes {
@@ -56,6 +65,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp)
+
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.common)
 
     testImplementation(libs.junit)
     testImplementation("io.mockk:mockk:1.13.5")
